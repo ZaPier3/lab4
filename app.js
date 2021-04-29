@@ -123,7 +123,7 @@ function fetchComments($id) {
         contentType: 'text/plain',
 
         success: function (data) { //on success
-            //reactive HTML that depends on the contents od the returned data
+            //reactive HTML that depends on the contents of the returned data
             comment='';
             comment='<div class="panel panel-default" style="width:800px">\n' +
                 '            <div class="panel-heading">\n' +
@@ -165,7 +165,19 @@ function fetchComments($id) {
 function setComment($id) {
 
     //TODO complete implementation using the product id
-    alert("app.js/setComment() not implemented")
+    $.ajax({
+        url: Url+'SetComment',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({"product_id":$id, "comment":$('#message-text').val(), "score":$('#score').val()}), //the json is defined here using javascript's dictionary syntax.
+        contentType: 'text/plain',
+        success: function (data) {
+            alert("Data sent.")
+        },
+        error: function (data) {
+            alert("Error while sending data.")
+        }
+    });
 
     //HINT
     //Take note of how the Ajax call in app.js/fetchComments() posts a GET request to corresponding API endpoint.
@@ -176,8 +188,19 @@ function setComment($id) {
 function addToCart($id) {
 
     //TODO complete implementation using the product id
-    alert("app.js/addToCart() not implemented")
-
+    $.ajax({
+        url: Url+'AddToCart',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({"product_id":$id, "email":$('#email').val()}), //the json is defined here using javascript's dictionary syntax.
+        contentType: 'text/plain',
+        success: function (data) {
+            alert("Added to cart.")
+        },
+        error: function (data) {
+            alert("Error while adding to cart.")
+        }
+    })
 
 }
 
